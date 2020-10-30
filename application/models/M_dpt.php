@@ -127,9 +127,9 @@ class M_dpt extends CI_Model{
   {
     $this->db->select("*");
     $this->db->from('tbl_wdpdt');
-    $this->db->join('tbl_wkecamatan','tbl_wkecamatan.id_kec=tbl_wdpdt.kdkec', 'left');
+    $this->db->join('tbl_wkecamatan','tbl_wkecamatan.id_kec = tbl_wdpdt.kdkec', 'left');
     $this->db->join('tbl_wdesa','tbl_wdesa.id_desa=tbl_wdpdt.kddesa', 'left'); 
-    $this->db->join('tbl_relawan', 'tbl_relawan.id_relawan=tbl_wdpdt.kdrelawan', 'right');
+    // $this->db->join('tbl_relawan', 'tbl_relawan.id_relawan=tbl_wdpdt.kdrelawan', 'left');
     $this->db->where('tbl_wdpdt.id',$id);
 
 		$query = $this->db->get();
@@ -163,7 +163,12 @@ class M_dpt extends CI_Model{
 		$data = $this->db->get();
 
 		return $data->result();
-	}
+  }
+  
+  public function save($data){
+    $this->db->insert($this->table, $data);
+    return $this->db->insert_id();
+  }
 
 	function load_data($ds)
 	{
@@ -215,7 +220,7 @@ class M_dpt extends CI_Model{
 		$data = $this->db->get($this->table);
 
 		return $data->num_rows();
-	}
+  }
   
 }
 
