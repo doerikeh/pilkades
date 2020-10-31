@@ -343,7 +343,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title"> Join Ke Relawan</h3>
+                <h3 class="modal-title">Join Ke Relawan</h3>
             </div>
             <div class="modal-body form">
                 <form action="#" id="form" class="form-horizontal" enctype="multipart/form-data">
@@ -380,12 +380,9 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">Nama Relawan</label>
                             <div class="col-md-9">
-
                                 <input name="nama" placeholder="Nama Lengkap" class="form-control" type="text">
                                 <span class="help-block"></span>
-
                             </div>
-
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">N.K.K</label>
@@ -741,11 +738,8 @@ var base_url = '<?php echo base_url();?>';
                 $('[name="kddesa"]').val(data.kddesa);
 
                 $('#modal_join').modal('show'); // show bootstrap modal when complete loaded
-
-            
-
-
             },
+            
             error: function (jqXHR, textStatus, errorThrown)
             {
                 alert('Error get data from ajax yeuh!!!');
@@ -813,14 +807,14 @@ var base_url = '<?php echo base_url();?>';
 
     function join()
 	{
-	    $('#btnSave').text('saving...'); //change button text
-	    $('#btnSave').attr('disabled',true); //set button disable 
+	    $('#btnSave').text('save'); //change button text
+	    
 	    var url;
 
 	    if(save_method == 'join') {
-	        url = "<?php echo site_url('relawan/ajax_add')?>";
+	        url = "<?php echo site_url('dpt/ajax_joinrelawan')?>";
 	    } else {
-	        url = "<?php echo site_url('relawan/ajax_update')?>";
+	        url = "<?php echo site_url('dpt/ajax_update')?>";
 	    }
 
 	    // ajax adding data to database
@@ -838,7 +832,7 @@ var base_url = '<?php echo base_url();?>';
 
 	            if(data.status) //if success close modal and reload ajax table
 	            {
-	                $('#modal_form').modal('hide');
+	                $('#modal_join').modal('hide');
 	                reload_table();
 	            }
 	            else

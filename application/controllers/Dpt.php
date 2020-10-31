@@ -37,7 +37,11 @@ class Dpt extends AUTH_Controller {
 
 		$this->template->views('dpt/home', $data);
     }
-    
+	
+	public function form_join($id = NULL){
+		$data['datas'] = $this->dpt->get_join_id($id);
+	}
+
     public function ajax_list()
 	{
 		$this->load->helper('url');
@@ -93,8 +97,7 @@ class Dpt extends AUTH_Controller {
 	
 	public function ajax_join($id){
 		$data = $this->dpt->get_join_id($id);
-		$data->tgl_lahir = ($data->tgl_lahir == '0000-00-00') ? '' : $data->tgl_lahir; 
-		echo json_encode($data);
+		echo json_encode($data);  
 	}
 
 	public function ajax_joinrelawan()
@@ -119,8 +122,8 @@ class Dpt extends AUTH_Controller {
                 'kddesa' => $this->input->post('kddesa'),
 			);
 
-		$this->dpt->join_by(array('id' => $this->input->post('id')), $data);
-		echo json_encode(array("status" => TRUE));
+			$insert = $this->dpt->save($data);
+			echo json_encode(array("status" => TRUE));
     }
 
     public function ajax_edit($id)
